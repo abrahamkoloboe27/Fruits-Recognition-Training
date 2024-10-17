@@ -36,6 +36,10 @@ batch_size = 128
 epochs = 2
 patience = 2
 
+# Afficher les paramètres d'entrainement
+logging.info(f"Hyperparameters: image_size={image_size}, batch_size={batch_size}, epochs={epochs}, patience={patience}")
+
+
 def load_data(data_dir, validation_split=0.25, seed=1337, image_size=(100, 100), batch_size=128, label_mode='int'):
     """Load and split the data into training and validation sets."""
     logging.info(f"Loading data from {data_dir}")
