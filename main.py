@@ -33,7 +33,7 @@ os.environ['NO_ALBUMENTATIONS_UPDATE'] = '1'
 # Set hyperparameters
 image_size = (100, 100)
 batch_size = 128
-epochs = 2
+epochs = 3
 patience = 2
 
 # Afficher les paramètres d'entrainement
