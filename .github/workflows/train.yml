@@ -24,7 +24,6 @@ jobs:
   
         - name: Install dependencies
           run: |
-            git clone https://github.com/fruits-360/fruits-360-100x100.git  /data
             python -m pip install --upgrade pip
             pip install -r requirements.txt
   
