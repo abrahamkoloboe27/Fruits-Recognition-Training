@@ -33,7 +33,7 @@ os.environ['NO_ALBUMENTATIONS_UPDATE'] = '1'
 # Set hyperparameters
 image_size = (100, 100)
 batch_size = 128
-epochs = 10
+epochs = 2
 patience = 2
 
 def load_data(data_dir, validation_split=0.25, seed=1337, image_size=(100, 100), batch_size=128, label_mode='int'):
