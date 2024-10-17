@@ -303,5 +303,5 @@ evaluate_model(vgg16, val_ds, "vgg16")
 
 
 # Zip the 'models' and 'artefacts' directories
-zip_directory('models', 'models_backup')
-zip_directory('artefacts', 'artefacts_backup')
+zip_directory('models', 'models')
+zip_directory('artefacts', 'artefacts')
