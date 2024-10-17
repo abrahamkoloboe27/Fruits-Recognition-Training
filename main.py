@@ -170,7 +170,7 @@ def compile_model(model):
     )
     return model
 
-def train_model(model, train_ds, val_ds, model_name, epochs=10, patience=2):
+def train_model(model, train_ds, val_ds, model_name, epochs=2, patience=2):
     """Train the model and save the best model and training log."""
     logging.info(f"Training {model_name} model")
     callbacks = [
@@ -216,7 +216,7 @@ def plot_training_history(history, model_name):
 def plot_confusion_matrix(cm, class_names, title='Confusion matrix', cmap=plt.cm.Blues, file_name='confusion_matrix.png'):
     """Plot the confusion matrix."""
     logging.info(f"Plotting confusion matrix for {title}")
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(200, 200))
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
@@ -282,10 +282,10 @@ vgg16 = create_vgg16_model(num_classes)
 vgg16 = compile_model(vgg16)
 
 # Train models
-history_cnn = train_model(cnn, train_ds, val_ds, "cnn")
-history_resnet = train_model(resnet, train_ds, val_ds, "resnet")
-history_efficent_net = train_model(efficent_net, train_ds, val_ds, "efficent_net")
-history_vgg16 = train_model(vgg16, train_ds, val_ds, "vgg16")
+history_cnn = train_model(cnn, train_ds, val_ds, "cnn", epochs=epochs)
+history_resnet = train_model(resnet, train_ds, val_ds, "resnet", epochs=epochs)
+history_efficent_net = train_model(efficent_net, train_ds, val_ds, "efficent_net", epochs=epochs)
+history_vgg16 = train_model(vgg16, train_ds, val_ds, "vgg16", epochs=epochs)
 
 # Plot training history
 plot_training_history(history_cnn, "CNN")
