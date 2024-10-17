@@ -7,3 +7,4 @@ matplotlib
 albumentations
 scikit-learn
 netron
+plotly
