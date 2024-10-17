@@ -1,0 +1,69 @@
+name: Train Model
+
+on:
+    push:
+      branches:
+        - main
+  
+permissions:
+    contents: write
+  
+jobs:
+    train-model:
+      runs-on: ubuntu-latest
+  
+      steps:
+
+        - name: Checkout repository
+          uses: actions/checkout@v2
+  
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.10'
+  
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+  
+        - name: Train and save model
+          run: |
+            python main.py
+        
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@latest
+          with:
+            tag_name: training_models_${{ github.run_number }}_${{ github.run_attempt }}
+            release_name: Model
+            body: |
+              Changes in this Release:
+              - Model trained and saved
+            draft: false
+            prerelease: false
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: Upload artefacts to Release
+          uses: actions/upload-release-asset@v1
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: ./artefacts.zip
+            asset_name: artefacts.zip
+            asset_content_type: application/octet-stream
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+        - name: Upload models to Release
+          uses: actions/upload-release-asset@v1
+          with:
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
+              asset_path: ./models.zip
+              asset_name: models.zip
+              asset_content_type: application/octet-stream
+          env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+              
