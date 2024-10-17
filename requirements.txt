@@ -6,5 +6,6 @@ tensorflow
 matplotlib
 albumentations
 scikit-learn
+mlflow
 netron
 plotly
