@@ -1,4 +1,4 @@
-# Préparation des Données et Entraînement des Modèles
+# 🍎 Préparation des Données et Entraînement des Modèles 🤖
 
 ---
 
@@ -8,12 +8,12 @@ Ce projet vise à entraîner et comparer plusieurs modèles de deep learning pou
 ---
 
 ### **Table des Matières**  
-1. [Dataset et Préparation](#dataset-et-préparation)  
-2. [Data Augmentation avec Albumentations](#data-augmentation-avec-albumentations)  
-3. [Architecture des Modèles Entraînés](#architecture-des-modèles-entrainés)  
-4. [Gestion des Callbacks et Enregistrement des Modèles](#gestion-des-callbacks-et-enregistrement-des-modèles)  
-5. [Suivi des Performances et Calcul des Métriques](#suivi-des-performances-et-calcul-des-métriques)  
-6. [Références et Ressources Utiles](#références-et-ressources-utiles)
+1. [Dataset et Préparation](#dataset-et-préparation) 🍇  
+2. [Data Augmentation avec Albumentations](#data-augmentation-avec-albumentations) 📈  
+3. [Architecture des Modèles Entraînés](#architecture-des-modèles-entrainés) 🏗️  
+4. [Gestion des Callbacks et Enregistrement des Modèles](#gestion-des-callbacks-et-enregistrement-des-modèles) 💾  
+5. [Suivi des Performances et Calcul des Métriques](#suivi-des-performances-et-calcul-des-métriques) 📊  
+6. [Références et Ressources Utiles](#références-et-ressources-utiles) 📚
 
 ---
 
@@ -47,10 +47,9 @@ train_ds, val_ds = load_data("data/Training")
 ### **2. Data Augmentation avec Albumentations**  
 Pour **enrichir le dataset** et éviter l’overfitting, nous avons appliqué de la **data augmentation** avec [Albumentations](https://albumentations.ai/).  
 **Transformations appliquées :**  
-- **Rotation** aléatoire entre -15° et +15°  
-- **Flip horizontal**  
-- **Modification de la luminosité et du contraste**
-
+- **Rotation** aléatoire entre -15° et +15° 🔄  
+- **Flip horizontal** ↔️  
+- **Modification de la luminosité et du contraste** 🌞
 
 #### **Extrait de Code : Data Augmentation**
 ```python
@@ -67,8 +66,8 @@ transforms = [
 ```
 
 **Pourquoi utiliser Albumentations ?**  
-- Optimisé pour des performances rapides.  
-- Prend en charge **PyTorch et TensorFlow/Keras**.  
+- Optimisé pour des performances rapides. 🚀  
+- Prend en charge **PyTorch et TensorFlow/Keras**. 🧠  
 
 Pour en savoir plus : [Guide Albumentations](https://albumentations.ai/docs/).
 
@@ -105,7 +104,6 @@ Nous avons testé 4 architectures :
 </tr>
 </table>
 </div>
-
 
 #### **Pourquoi plusieurs modèles ?**  
 - **ResNet** et **EfficientNet** offrent des performances élevées sur des tâches de classification.  
