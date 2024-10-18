@@ -275,29 +275,29 @@ cnn = compile_model(cnn)
 resnet = create_resnet_model(num_classes)
 resnet = compile_model(resnet)
 
-efficent_net = create_efficientnet_model(num_classes)
-efficent_net = compile_model(efficent_net)
+# efficent_net = create_efficientnet_model(num_classes)
+# efficent_net = compile_model(efficent_net)
 
-vgg16 = create_vgg16_model(num_classes)
-vgg16 = compile_model(vgg16)
+# vgg16 = create_vgg16_model(num_classes)
+# vgg16 = compile_model(vgg16)
 
 # Train models
 history_cnn = train_model(cnn, train_ds, val_ds, "cnn", epochs=epochs)
 history_resnet = train_model(resnet, train_ds, val_ds, "resnet", epochs=epochs)
-history_efficent_net = train_model(efficent_net, train_ds, val_ds, "efficent_net", epochs=epochs)
-history_vgg16 = train_model(vgg16, train_ds, val_ds, "vgg16", epochs=epochs)
+# history_efficent_net = train_model(efficent_net, train_ds, val_ds, "efficent_net", epochs=epochs)
+# history_vgg16 = train_model(vgg16, train_ds, val_ds, "vgg16", epochs=epochs)
 
 # Plot training history
 plot_training_history(history_cnn, "CNN")
 plot_training_history(history_resnet, "ResNet")
-plot_training_history(history_efficent_net, "EfficientNet")
-plot_training_history(history_vgg16, "VGG16")
+# plot_training_history(history_efficent_net, "EfficientNet")
+# plot_training_history(history_vgg16, "VGG16")
 
 # Evaluate models
 evaluate_model(cnn, val_ds, "cnn")
 evaluate_model(resnet, val_ds, "resnet")
-evaluate_model(efficent_net, val_ds, "efficent_net")
-evaluate_model(vgg16, val_ds, "vgg16")
+# evaluate_model(efficent_net, val_ds, "efficent_net")
+# evaluate_model(vgg16, val_ds, "vgg16")
 
 
 
