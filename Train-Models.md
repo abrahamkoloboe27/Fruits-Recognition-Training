@@ -1,11 +1,11 @@
 # 🍎 Préparation des Données et Entraînement des Modèles 🤖
 
----
+
 
 ### **Introduction**  
 Ce projet vise à entraîner et comparer plusieurs modèles de deep learning pour classer les images issues du dataset [Fruits 360 (100x100)](https://github.com/fruits-360/fruits-360-100x100). L’objectif est de sélectionner le **modèle le plus performant** selon plusieurs métriques pour l’envoyer en production. Ce README documente la **préparation des données**, l’**entraînement des modèles** et la **méthodologie utilisée**.
 
----
+
 
 ### **Table des Matières**  
 1. [Dataset et Préparation](#dataset-et-préparation) 🍇  
@@ -15,7 +15,7 @@ Ce projet vise à entraîner et comparer plusieurs modèles de deep learning pou
 5. [Suivi des Performances et Calcul des Métriques](#suivi-des-performances-et-calcul-des-métriques) 📊  
 6. [Références et Ressources Utiles](#références-et-ressources-utiles) 📚
 
----
+
 
 ### **1. Dataset et Préparation**  
 Nous utilisons le **dossier `Training`** du dataset Fruits 360, contenant des images de différentes classes de fruits.  
@@ -44,7 +44,7 @@ def load_data(data_dir, validation_split=0.25, seed=1337,
 train_ds, val_ds = load_data("data/Training")
 ```
 
----
+
 
 ### **2. Data Augmentation avec Albumentations**  
 Pour **enrichir le dataset** et éviter l’overfitting, nous avons appliqué de la **data augmentation** avec [Albumentations](https://albumentations.ai/).  
@@ -74,7 +74,7 @@ transforms = [
 
 Pour en savoir plus : [Guide Albumentations](https://albumentations.ai/docs/).
 
----
+
 
 ### **3. Architecture des Modèles Entraînés**  
 Nous avons testé 4 architectures :  
@@ -137,7 +137,7 @@ def create_efficientnet_model(num_classes):
 create_efficientnet_model(num_classes)
 ```
 
----
+
 
 ### **4. Gestion des Callbacks et Enregistrement des Modèles**  
 Nous avons utilisé un **callback Keras** pour enregistrer uniquement le **meilleur modèle** sur la validation.
@@ -161,7 +161,7 @@ callbacks = [
 - Automatisation de l’enregistrement du **meilleur modèle** pour éviter les surentraînements.  
 - Permet de **recharger facilement** le modèle pour une utilisation future.  
 
----
+
 
 ### **5. Suivi des Performances et Calcul des Métriques**  
 Après l’entraînement, nous avons calculé plusieurs métriques pour évaluer les performances sur la validation :  
@@ -182,7 +182,7 @@ recall = recall_score(y_val, y_pred.argmax(axis=1), average='weighted')
 print(f"F1: {f1}, AUC: {auc}, Precision: {precision}, Recall: {recall}")
 ```
 
----
+
 
 ### **6. Références et Ressources Utiles**  
 - **Albumentations :** [Documentation](https://albumentations.ai/docs/)  
@@ -191,7 +191,7 @@ print(f"F1: {f1}, AUC: {auc}, Precision: {precision}, Recall: {recall}")
 - **EfficientNet :** [Article de recherche](https://arxiv.org/abs/1905.11946)  
 - **Introduction aux métriques ML :** [Guide Sklearn](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
----
+
 
 ### **Comment Répliquer l’Entraînement ?**  
 Pour reproduire l’entraînement :  
@@ -209,7 +209,7 @@ Pour reproduire l’entraînement :
    python main.py
    ```
 
----
+
 
 ### **Conclusion**  
 Ce README documente toutes les étapes de **préparation des données** et **entraînement des modèles**. Chaque décision technique a été justifiée pour **assurer la qualité du modèle final**. N'hésitez pas à explorer les **références fournies** pour approfondir votre compréhension des concepts utilisés.
