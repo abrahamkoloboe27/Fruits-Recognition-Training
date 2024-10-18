@@ -25,7 +25,9 @@ Nous utilisons le **dossier `Training`** du dataset Fruits 360, contenant des im
 #### **Commandes pour Préparer le Dataset**  
 
 ```python
-def load_data(data_dir, validation_split=0.25, seed=1337, image_size=(100, 100), batch_size=128, label_mode='int'):
+def load_data(data_dir, validation_split=0.25, seed=1337, 
+                image_size=(100, 100), batch_size=128, 
+                label_mode='int'):
     """Load and split the data into training and validation sets."""
     logging.info(f"Loading data from {data_dir}")
     train_ds, val_ds = keras.utils.image_dataset_from_directory(
@@ -61,7 +63,8 @@ transforms = [
         A.Transpose(p=1.0),
         A.VerticalFlip(p=1.0),
         A.HorizontalFlip(p=1.0),
-        A.RandomBrightnessContrast(brightness_limit=0.5, contrast_limit=0.5, p=1.0),
+        A.RandomBrightnessContrast(brightness_limit=0.5, 
+        contrast_limit=0.5, p=1.0),
     ]
 ```
 
@@ -115,7 +118,8 @@ Nous avons testé 4 architectures :
 def create_efficientnet_model(num_classes):
     """Create an EfficientNet model."""
     logging.info("Creating EfficientNet model")
-    base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=(100, 100, 3))
+    base_model = EfficientNetB0(weights='imagenet', 
+    include_top=False, input_shape=(100, 100, 3))
     base_model.trainable = False
 
     model = keras.Sequential([
@@ -144,9 +148,11 @@ imoort keras
 logging.info(f"Training {model_name} model")
 callbacks = [
         keras.callbacks.ModelCheckpoint(
-            f"models/best_model_{model_name}.keras", save_best_only=True, monitor="val_acc", mode="max"
+            f"models/best_model_{model_name}.keras", 
+            save_best_only=True, monitor="val_acc", mode="max"
         ),
-        keras.callbacks.EarlyStopping(monitor='val_acc', patience=patience, mode="max", restore_best_weights=True),
+        keras.callbacks.EarlyStopping(monitor='val_acc', patience=patience, 
+        mode="max", restore_best_weights=True),
         keras.callbacks.CSVLogger(f'artefacts/training_log_{model_name}.csv')
 ]
 ```
