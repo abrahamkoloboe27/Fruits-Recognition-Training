@@ -131,7 +131,7 @@ L'augmentation inclut la rotation, le flip et l’ajustement de contraste :
 
 ![Image](image/cnn-history.png)  
 
----
+
 
 # **Évaluation des Modèles et Benchmarking** 🏅
 
