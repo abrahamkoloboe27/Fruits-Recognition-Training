@@ -5,7 +5,6 @@
 ## **Problème de Classification** 🍎🍌🍇
 Le projet vise à développer plusieurs modèles d’intelligence artificielle capables de classifier des images de fruits (100x100 pixels). L’objectif est d’entraîner des modèles pour reconnaître et classer différents types de fruits, comme des pommes, des bananes, etc.
 
----
 
 Le but de ce projet est de développer et d'évaluer plusieurs modèles d'intelligence artificielle capables de classifier des images de fruits. Les images utilisées dans ce projet sont de taille 100x100 pixels. Nous cherchons à entraîner des modèles qui peuvent reconnaître et classer différents types de fruits, tels que des pommes, des bananes, etc.
 
@@ -20,7 +19,7 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 3. **ResNet** 🕸️
 4. **VGG16** 🏛️
 
----
+
 
 # **Flux de Travail** 🔄
 
@@ -46,7 +45,7 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 7. **Gestion des Artéfacts** 💾  
    - Sauvegarde des modèles, graphiques et journaux.
 
----
+
 
 # **Récupérer les Données et Installer les Dépendances**  
 
@@ -56,7 +55,6 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 2. **Installer les dépendances** :  
    - Installation des bibliothèques nécessaires à l’entraînement.
 
----
 
 # **Paramètres Généraux du Training** 📚⚙️
 
@@ -65,7 +63,7 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 - **epochs** : 10  
 - **patience** : 2  
 
----
+
 
 # **Fonctions Utiles** 🛠️
 
@@ -82,20 +80,20 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 4. **Gestion des Artéfacts** 💾  
    - **`zip_directory()`** : Compresse un répertoire.
 
----
+
 
 # **Chargement des Données et Visualisation des Fruits** 🍎🍌🍇
 
 Visualisez une grille d'images issues du dataset pour vérifier leur intégrité :  
 ![Image](image/sample-base.png)  
 
----
+
 
 # **Data Augmentation et Visualisation des Fruits Augmentés** 📈  
 L'augmentation inclut la rotation, le flip et l’ajustement de contraste :  
 ![Image](image/sample-augmented.png)  
 
----
+
 
 # **Architecture des Modèles** 🏛️
 
@@ -124,7 +122,6 @@ L'augmentation inclut la rotation, le flip et l’ajustement de contraste :
 </table>
 </div>
 
----
 
 # **Train, Plot, and Evaluate the Models** 🚀📊  
 
@@ -158,7 +155,15 @@ L'augmentation inclut la rotation, le flip et l’ajustement de contraste :
 | Temps d'inférence moyen ⏱️ | 0.2         |
 
 
----
+| Modèle       | Accuracy 🎯 | AUC 📈 | Précision 🧮 | Rappel 🔍 | F1 🏆 | Temps d'inférence moyen ⏱️ | Score final 🏅 |
+|--------------|-------------|--------|--------------|-----------|-------|-----------------------------|----------------|
+| CNN          | 0.985317    | 0.999915| 0.988543     | 0.985317  | 0.984813| 1.000000                    | 0.989986       |
+| ResNet       | 1.000000    | 1.000000| 1.000000     | 1.000000  | 1.000000| 0.185564                    | 0.837113       |
+| VGG16        | 0.974489    | 0.999853| 0.977447     | 0.974489  | 0.973609| 0.065214                    | 0.795378       |
+| EfficientNet | 0.954392    | 0.999682| 0.965315     | 0.954392  | 0.954058| 0.044032                    | 0.777908       |
+
+
+
 
 # **Conclusion** 🎉
 
