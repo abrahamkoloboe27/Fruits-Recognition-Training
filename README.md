@@ -2,6 +2,25 @@
 
 ![Fruits-360](https://github.com/fruits-360/.github/blob/main/fruits-360-dataset.jpg)
 
+
+#### 📑 Table des Matières
+1. [🚀 Aperçu du Projet](#aperçu-du-projet)
+2. [🍎🍌🍇 Problème de Classification](#problème-de-classification)
+3. [🎯 Objectif](#objectif)
+4. [🔄 Flux de Travail](#flux-de-travail)
+5. [📂 Récupérer les Données et Installer les Dépendances](#récupérer-les-données-et-installer-les-dépendances)
+6. [📚⚙️ Paramètres Généraux du Training](#paramètres-généraux-du-training)
+7. [🛠️ Fonctions Utiles](#fonctions-utiles)
+8. [🍎🍌🍇 Chargement des Données et Visualisation des Fruits](#chargement-des-données-et-visualisation-des-fruits)
+9. [📈 Data Augmentation et Visualisation des Fruits Augmentés](#data-augmentation-et-visualisation-des-fruits-augmentés)
+10. [🏛️ Architecture des Modèles](#architecture-des-modèles)
+11. [🚀📊 Train, Plot, and Evaluate the Models](#train-plot-and-evaluate-the-models)
+12. [🏅 Évaluation des Modèles et Benchmarking](#évaluation-des-modèles-et-benchmarking)
+13. [🎉 Conclusion](#conclusion)
+14. [📜 Références et Ressources Utiles](#références-et-ressources-utiles)
+15. [📧 Contact](#contact)
+
+
 ## **Problème de Classification** 🍎🍌🍇
 
 
@@ -174,6 +193,11 @@ Le projet se termine par la sélection du modèle le plus performant. Le modèle
 - **ResNet et Fine-Tuning :** [Article de référence](https://arxiv.org/abs/1512.03385)  
 - **EfficientNet :** [Article de recherche](https://arxiv.org/abs/1905.11946)  
 - **Introduction aux métriques ML :** [Guide Sklearn](https://scikit-learn.org/stable/modules/model_evaluation.html)
+
+
+
+#### 📧 Contact
+Pour toute question ou suggestion, veuillez contacter Abraham KOLOBOE à l'adresse email [abklb27@gmail.com](mailto:abklb27@gmail.com).
 
 
 Merci pour votre attention ! 😊
