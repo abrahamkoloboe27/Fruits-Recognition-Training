@@ -1,87 +1,101 @@
-# 🍎 Préparation des Données et Entraînement des Modèles 🤖
+# **Aperçu du Projet** 🚀
 
 
 
-### **Introduction**  
-Ce projet vise à entraîner et comparer plusieurs modèles de deep learning pour classer les images issues du dataset [Fruits 360 (100x100)](https://github.com/fruits-360/fruits-360-100x100). L’objectif est de sélectionner le **modèle le plus performant** selon plusieurs métriques pour l’envoyer en production. Ce README documente la **préparation des données**, l’**entraînement des modèles** et la **méthodologie utilisée**.
+## **Problème de Classification** 🍎🍌🍇
+Le projet vise à développer plusieurs modèles d’intelligence artificielle capables de classifier des images de fruits (100x100 pixels). L’objectif est d’entraîner des modèles pour reconnaître et classer différents types de fruits, comme des pommes, des bananes, etc.
+
+
+Le but de ce projet est de développer et d'évaluer plusieurs modèles d'intelligence artificielle capables de classifier des images de fruits. Les images utilisées dans ce projet sont de taille 100x100 pixels. Nous cherchons à entraîner des modèles qui peuvent reconnaître et classer différents types de fruits, tels que des pommes, des bananes, etc.
+
+## Objectif 🎯
+
+L'objectif principal est de comparer les performances de différents modèles de classification d'images, y compris un modèle CNN personnalisé, EfficientNet, ResNet et VGG16. Nous espérons identifier le modèle le plus performant pour la tâche de classification des fruits.
+
+Dans ce projet, nous visons à entraîner et évaluer quatre modèles différents pour la classification d'images. Les modèles avec lesquels nous travaillons incluent :
+
+1. **Modèle CNN Personnalisé** 🛠️
+2. **EfficientNet** ⚡
+3. **ResNet** 🕸️
+4. **VGG16** 🏛️
 
 
 
-### **Table des Matières**  
-1. [Dataset et Préparation](#dataset-et-préparation) 🍇  
-2. [Data Augmentation avec Albumentations](#data-augmentation-avec-albumentations) 📈  
-3. [Architecture des Modèles Entraînés](#architecture-des-modèles-entrainés) 🏗️  
-4. [Gestion des Callbacks et Enregistrement des Modèles](#gestion-des-callbacks-et-enregistrement-des-modèles) 💾  
-5. [Suivi des Performances et Calcul des Métriques](#suivi-des-performances-et-calcul-des-métriques) 📊  
-6. [Références et Ressources Utiles](#références-et-ressources-utiles) 📚
+# **Flux de Travail** 🔄
+
+1. **Chargement et Prétraitement des Données** 📂  
+   - Chargement du jeu de données et division en ensembles d'entraînement et de validation.  
+   - Utilisation de techniques d'augmentation de données.
+
+2. **Création et Compilation des Modèles** 🛠️  
+   - Définition et compilation des modèles avec des fonctions de perte et optimiseurs adaptés.
+
+3. **Entraînement des Modèles** 🏋️‍♂️  
+   - Surveillance des performances pour éviter le surapprentissage. 
+
+4. **Évaluation des Modèles** 🧪  
+   - Calcul de métriques : Accuracy, AUC, précision, rappel, F1, temps d'inférence. 
+
+5. **Visualisation** 📊  
+   - Génération de graphiques et matrices de confusion pour évaluer les résultats.
+
+6. **Benchmarking** 🏅  
+   - Comparaison des modèles via une métrique pondérée personnalisée.
+
+7. **Gestion des Artéfacts** 💾  
+   - Sauvegarde des modèles, graphiques et journaux.
 
 
 
-### **1. Dataset et Préparation**  
-Nous utilisons le **dossier `Training`** du dataset Fruits 360, contenant des images de différentes classes de fruits.  
-- **Split des données :** 75 % pour l’entraînement et 25 % pour la validation.  
-- **Pourquoi ce split ?** Il permet de s’assurer que le modèle peut bien généraliser sur des données non vues.
+# **Récupérer les Données et Installer les Dépendances**  
 
-#### **Commandes pour Préparer le Dataset**  
+1. **Cloner le dépôt GitHub contenant les données** :  
+   [Lien des données](https://github.com/fruits-360/fruits-360-100x100) 🍎🍌🍇  
 
-```python
-def load_data(data_dir, validation_split=0.25, seed=1337, 
-                image_size=(100, 100), batch_size=128, 
-                label_mode='int'):
-    """Load and split the data into training and validation sets."""
-    logging.info(f"Loading data from {data_dir}")
-    train_ds, val_ds = keras.utils.image_dataset_from_directory(
-        data_dir,
-        validation_split=validation_split,
-        subset="both",
-        seed=seed,
-        image_size=image_size,
-        batch_size=batch_size,
-        label_mode=label_mode
-    )
-    return train_ds, val_ds
-# Load data
-train_ds, val_ds = load_data("data/Training")
-```
+2. **Installer les dépendances** :  
+   - Installation des bibliothèques nécessaires à l’entraînement.
+
+
+# **Paramètres Généraux du Training** 📚⚙️
+
+- **image_size** : 100x100 pixels  
+- **batch_size** : 128  
+- **epochs** : 10  
+- **patience** : 2  
 
 
 
-### **2. Data Augmentation avec Albumentations**  
-Pour **enrichir le dataset** et éviter l’overfitting, nous avons appliqué de la **data augmentation** avec [Albumentations](https://albumentations.ai/).  
-**Transformations appliquées :**  
-- **Rotation** aléatoire entre -15° et +15° 🔄  
-- **Flip horizontal** ↔️  
-- **Modification de la luminosité et du contraste** 🌞
+# **Fonctions Utiles** 🛠️
 
-#### **Extrait de Code : Data Augmentation**
-```python
-import albumentations as A
+1. **Chargement et Augmentation des Données** 📂🔄  
+   - **`load_data()`** : Divise les données en ensembles d'entraînement et de validation.  
+   - **`data_augmentation()`** : Applique des augmentations.  
 
-# Définition de l'augmentation
-transforms = [
-        A.RandomRotate90(p=1.0),
-        A.Transpose(p=1.0),
-        A.VerticalFlip(p=1.0),
-        A.HorizontalFlip(p=1.0),
-        A.RandomBrightnessContrast(brightness_limit=0.5, 
-        contrast_limit=0.5, p=1.0),
-    ]
-```
+2. **Création et Compilation des Modèles** 🛠️  
+   - **`create_cnn_model()`**, **`create_resnet_model()`**, **`create_efficientnet_model()`**, **`create_vgg16_model()`**.  
 
-**Pourquoi utiliser Albumentations ?**  
-- Optimisé pour des performances rapides. 🚀  
-- Prend en charge **PyTorch et TensorFlow/Keras**. 🧠  
+3. **Entraînement et Évaluation** 🏋️‍♂️🧪  
+   - **`train_model()`**, **`evaluate_model()`**, **`plot_training_history()`**, **`plot_confusion_matrix()`**.  
 
-Pour en savoir plus : [Guide Albumentations](https://albumentations.ai/docs/).
+4. **Gestion des Artéfacts** 💾  
+   - **`zip_directory()`** : Compresse un répertoire.
 
 
 
-### **3. Architecture des Modèles Entraînés**  
-Nous avons testé 4 architectures :  
-- **CNN Custom** (baseline simple)  
-- **ResNet50**  
-- **VGG16**  
-- **EfficientNetB0**  
+# **Chargement des Données et Visualisation des Fruits** 🍎🍌🍇
+
+Visualisez une grille d'images issues du dataset pour vérifier leur intégrité :  
+![Image](image/sample-base.png)  
+
+
+
+# **Data Augmentation et Visualisation des Fruits Augmentés** 📈  
+L'augmentation inclut la rotation, le flip et l’ajustement de contraste :  
+![Image](image/sample-augmented.png)  
+
+
+
+# **Architecture des Modèles** 🏛️
 
 <div style="text-align: center;">
 <table style="margin: auto;">
@@ -108,83 +122,56 @@ Nous avons testé 4 architectures :
 </table>
 </div>
 
-#### **Pourquoi plusieurs modèles ?**  
-- **ResNet** et **EfficientNet** offrent des performances élevées sur des tâches de classification.  
-- **VGG16** est plus simple mais toujours compétitif.  
-- **CNN Custom** permet d’établir une **baseline** à partir de laquelle comparer les performances.
 
-**Code : Initialisation des Modèles Pré-entrainés**  
-```python
-def create_efficientnet_model(num_classes):
-    """Create an EfficientNet model."""
-    logging.info("Creating EfficientNet model")
-    base_model = EfficientNetB0(weights='imagenet', 
-    include_top=False, input_shape=(100, 100, 3))
-    base_model.trainable = False
+# **Train, Plot, and Evaluate the Models** 🚀📊  
 
-    model = keras.Sequential([
-        base_model,
-        layers.GlobalAveragePooling2D(name='global_avg_pooling'),
-        layers.Dense(num_classes*3, activation='relu', name='dense_1'),
-        layers.BatchNormalization(name='batch_norm_1'),
-        layers.Dropout(0.2, name='dropout_1'),
-        layers.Dense(num_classes*2, activation='relu', name='dense_2'),
-        layers.BatchNormalization(name='batch_norm_2'),
-        layers.Dropout(0.2, name='dropout_2'),
-        layers.Dense(num_classes, activation='softmax', name='output_layer')
-    ])
-    return model
-create_efficientnet_model(num_classes)
-```
+1. **Train the Models** 🏋️‍♂️  
+2. **Plot the Training History** 📈  
+3. **Evaluate the Models** 🧪  
+
+![Image](image/cnn-history.png)  
+
+---
+
+# **Évaluation des Modèles et Benchmarking** 🏅
+
+1. **Chargement des Modèles** 📥 :  
+   - Les modèles sont testés sur des données jamais vues.
+
+2. **Calcul des Métriques** 📊 :  
+   - Exactitude, AUC, Précision, Rappel, F1 Score, Temps d'inférence.
+![Image](image/scores-models.png)
+
+3. **Benchmarking** 🏆 :  
+   - Calcul d'une métrique pondérée pour sélectionner le modèle optimal.
+
+| Métrique                  | Coefficient |
+|---------------------------|-------------|
+| Accuracy 🎯               | 0.4         |
+| AUC 📈                    | 0.1         |
+| Précision 🧮              | 0.1         |
+| Rappel 🔍                 | 0.1         |
+| F1 🏆                     | 0.1         |
+| Temps d'inférence moyen ⏱️ | 0.2         |
 
 
-
-### **4. Gestion des Callbacks et Enregistrement des Modèles**  
-Nous avons utilisé un **callback Keras** pour enregistrer uniquement le **meilleur modèle** sur la validation.
-
-#### **Extrait de Code : Callback**
-```python
-imoort keras
-logging.info(f"Training {model_name} model")
-callbacks = [
-        keras.callbacks.ModelCheckpoint(
-            f"models/best_model_{model_name}.keras", 
-            save_best_only=True, monitor="val_acc", mode="max"
-        ),
-        keras.callbacks.EarlyStopping(monitor='val_acc', patience=patience, 
-        mode="max", restore_best_weights=True),
-        keras.callbacks.CSVLogger(f'artefacts/training_log_{model_name}.csv')
-]
-```
-
-**Pourquoi utiliser un callback ?**  
-- Automatisation de l’enregistrement du **meilleur modèle** pour éviter les surentraînements.  
-- Permet de **recharger facilement** le modèle pour une utilisation future.  
+| Modèle       | Accuracy 🎯 | AUC 📈 | Précision 🧮 | Rappel 🔍 | F1 🏆 | Temps d'inférence moyen ⏱️ | Score final 🏅 |
+|--------------|-------------|--------|--------------|-----------|-------|-----------------------------|----------------|
+| CNN          | 0.985317    | 0.999915| 0.988543     | 0.985317  | 0.984813| 1.000000                    | 0.989986       |
+| ResNet       | 1.000000    | 1.000000| 1.000000     | 1.000000  | 1.000000| 0.185564                    | 0.837113       |
+| VGG16        | 0.974489    | 0.999853| 0.977447     | 0.974489  | 0.973609| 0.065214                    | 0.795378       |
+| EfficientNet | 0.954392    | 0.999682| 0.965315     | 0.954392  | 0.954058| 0.044032                    | 0.777908       |
 
 
 
-### **5. Suivi des Performances et Calcul des Métriques**  
-Après l’entraînement, nous avons calculé plusieurs métriques pour évaluer les performances sur la validation :  
-- **F1-Score** : Équilibre entre précision et rappel.  
-- **AUC (Area Under Curve)** : Mesure de la capacité du modèle à distinguer les classes.  
-- **Précision et Rappel** : Pour évaluer la qualité des prédictions.
 
-#### **Extrait de Code : Calcul des Métriques**
-```python
-from sklearn.metrics import f1_score, roc_auc_score, precision_score, recall_score
+# **Conclusion** 🎉
 
-y_pred = model.predict(X_val)
-f1 = f1_score(y_val, y_pred.argmax(axis=1), average='weighted')
-auc = roc_auc_score(y_val, y_pred, multi_class='ovo')
-precision = precision_score(y_val, y_pred.argmax(axis=1), average='weighted')
-recall = recall_score(y_val, y_pred.argmax(axis=1), average='weighted')
-
-print(f"F1: {f1}, AUC: {auc}, Precision: {precision}, Recall: {recall}")
-```
+Le projet se termine par la sélection du modèle le plus performant. Le modèle choisi sera recommandé pour des tâches futures de classification d'images.  
 
 
 
-### **6. Références et Ressources Utiles**  
+# **Références et Ressources Utiles**  
 - **Albumentations :** [Documentation](https://albumentations.ai/docs/)  
 - **Keras Callbacks :** [ModelCheckpoint](https://keras.io/api/callbacks/model_checkpoint/)  
 - **ResNet et Fine-Tuning :** [Article de référence](https://arxiv.org/abs/1512.03385)  
@@ -192,25 +179,4 @@ print(f"F1: {f1}, AUC: {auc}, Precision: {precision}, Recall: {recall}")
 - **Introduction aux métriques ML :** [Guide Sklearn](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
 
-
-### **Comment Répliquer l’Entraînement ?**  
-Pour reproduire l’entraînement :  
-1. **Cloner le repo :**  
-   ```bash
-   git https://github.com/abrahamkoloboe27/Machine-Learning-En-Production-LinkedIn.git /data
-   cd data
-   ```
-2. **Installer les dépendances :**  
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Lancer l’entraînement :**  
-   ```bash
-   python main.py
-   ```
-
-
-
-### **Conclusion**  
-Ce README documente toutes les étapes de **préparation des données** et **entraînement des modèles**. Chaque décision technique a été justifiée pour **assurer la qualité du modèle final**. N'hésitez pas à explorer les **références fournies** pour approfondir votre compréhension des concepts utilisés.
-
+Merci pour votre attention ! 😊
