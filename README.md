@@ -1,6 +1,6 @@
 # **Aperçu du Projet** 🚀
 
-
+![Fruits-360](https://github.com/fruits-360/.github/blob/main/fruits-360-dataset.jpg)
 
 ## **Problème de Classification** 🍎🍌🍇
 Le projet vise à développer plusieurs modèles d’intelligence artificielle capables de classifier des images de fruits (100x100 pixels). L’objectif est d’entraîner des modèles pour reconnaître et classer différents types de fruits, comme des pommes, des bananes, etc.
