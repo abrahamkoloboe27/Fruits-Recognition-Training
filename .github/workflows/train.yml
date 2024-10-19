@@ -3,6 +3,9 @@ name: Train Model
 on:
     push:
       branches:
+        - run
+    pull_request:
+      branches:
         - main
   
 permissions:
