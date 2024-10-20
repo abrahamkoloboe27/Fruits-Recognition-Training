@@ -66,7 +66,9 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 # **Récupérer les Données et Installer les Dépendances**  
 
 1. **Cloner le dépôt GitHub contenant les données** :  
-   [Lien des données](https://github.com/fruits-360/fruits-360-100x100) 🍎🍌🍇  
+   [Lien des données](https://github.com/fruits-360/fruits-360-100x100) 🍎🍌🍇 
+   
+   Les données que nous avons téléchargées sont divisées en deux dossiers : `Training` et `Test`. Les données du dossier `Training` sont celles qui seront utilisées pour l'entraînement des modèles. Ce sont les données de ce dossier que nous allons splitter en `train_ds` et `val_ds`. 
 
 2. **Installer les dépendances** :  
    - Installation des bibliothèques nécessaires à l’entraînement.
