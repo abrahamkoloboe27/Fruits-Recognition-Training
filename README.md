@@ -67,8 +67,28 @@ Dans ce projet, nous visons à entraîner et évaluer quatre modèles différent
 
 1. **Cloner le dépôt GitHub contenant les données** :  
    [Lien des données](https://github.com/fruits-360/fruits-360-100x100) 🍎🍌🍇 
+
    
-   Les données que nous avons téléchargées sont divisées en deux dossiers : `Training` et `Test`. Les données du dossier `Training` sont celles qui seront utilisées pour l'entraînement des modèles. Ce sont les données de ce dossier que nous allons splitter en `train_ds` et `val_ds`. 
+   Les données téléchargées sont divisées en deux dossiers : `Training` et `Test`.
+
+   - Le dossier `Training` contient 70,491 images. Nous appliquerons de la data augmentation 
+   pour obtenir un total de 422,946 images. Ces images seront ensuite divisées en deux ensembles :
+   - `train_ds` : 317,209 images (75%)
+   - `val_ds` : 105,737 images (25%)
+
+   - Le dossier `Test` contient 23,619 images qui seront utilisées pour évaluer les modèles.
+
+   Le dataset est composé d'images de 141 classes de fruits.
+
+   ### Arborescence du processus de division des données
+   ```markdown
+   data/  
+   ├── Training/ (70,491 images)  
+   │   ├── Augmented/(422,946 images)  
+   │   │   ├── train_ds/(317,209 images - 75%)  
+   │   │   └── val_ds/(105,737 images - 25%)  
+   └── Test/ (23,619 images)  
+   ```
 
 2. **Installer les dépendances** :  
    - Installation des bibliothèques nécessaires à l’entraînement.
