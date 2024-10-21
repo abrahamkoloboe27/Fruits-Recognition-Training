@@ -201,7 +201,7 @@ L'augmentation inclut la rotation, le flip et l’ajustement de contraste :
 | EfficientNet | 0.954392    | 0.999682| 0.965315     | 0.954392  | 0.954058| 0.044032                    | 0.777908       |
 
 
-
+![Image](images-models/final-score-model.png)
 
 # **Conclusion** 🎉
 
