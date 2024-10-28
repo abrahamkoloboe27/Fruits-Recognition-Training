@@ -7,5 +7,7 @@ matplotlib
 albumentations
 scikit-learn
 mlflow
+python-multipart
+pillow
 netron
 plotly
