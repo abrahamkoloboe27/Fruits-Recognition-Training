@@ -2,6 +2,7 @@ import requests
 import os
 import random
 import json
+import time
 
 API_URL = 'http://localhost:8000/'
 
@@ -25,8 +26,11 @@ def send_image_to_api(folder, image):
         
         
 if __name__ == '__main__':
-    folder, image = random_image_choice()
-    try : 
-        send_image_to_api(folder, image)
-    except:
-        print("Error")
+    while True:
+        folder, image = random_image_choice()
+        try : 
+            send_image_to_api(folder, image)
+        except:
+            print("Error")
+        time.sleep(random.uniform(0.1, 0.5))
+        os.chdir('../../..')
